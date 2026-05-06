@@ -1,0 +1,107 @@
+---
+import { languages, type Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const localeUrls: Record<Lang, string> = {
+  'zh-TW': '/',
+  en: '/en/',
+  ja: '/ja/',
+};
+
+const shortLabel: Record<Lang, string> = {
+  'zh-TW': '繁',
+  en: 'EN',
+  ja: 'JP',
+};
+---
+
+<div class="relative" data-lang-switcher>
+  <button
+    type="button"
+    data-lang-trigger
+    aria-label="Change language"
+    aria-haspopup="true"
+    aria-expanded="false"
+    class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 hover:border-primary/40 bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md transition-all text-on-surface"
+  >
+    <span class="material-symbols-outlined text-[18px]">language</span>
+    <span class="text-label-sm uppercase tracking-widest">{shortLabel[lang]}</span>
+    <span
+      class="material-symbols-outlined text-[18px] transition-transform duration-200"
+      data-lang-arrow
+    >
+      expand_more
+    </span>
+  </button>
+
+  <div
+    data-lang-menu
+    class="absolute right-0 top-[calc(100%+8px)] min-w-[180px] rounded-xl py-2 hidden border border-white/10 bg-surface-container/95 backdrop-blur-xl shadow-2xl z-50"
+    role="menu"
+  >
+    {
+      (Object.keys(languages) as Lang[]).map((code) => (
+        <a
+          href={localeUrls[code]}
+          role="menuitem"
+          class:list={[
+            'flex items-center justify-between px-5 py-3 text-sm transition-colors',
+            code === lang
+              ? 'text-primary'
+              : 'text-on-surface-variant hover:text-primary hover:bg-white/5',
+          ]}
+        >
+          <span>{languages[code]}</span>
+          {code === lang && (
+            <span class="material-symbols-outlined text-[18px]">check</span>
+          )}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  function initLangSwitcher() {
+    const switchers = document.querySelectorAll<HTMLElement>('[data-lang-switcher]');
+
+    switchers.forEach((switcher) => {
+      const trigger = switcher.querySelector<HTMLButtonElement>('[data-lang-trigger]');
+      const menu = switcher.querySelector<HTMLDivElement>('[data-lang-menu]');
+      const arrow = switcher.querySelector<HTMLElement>('[data-lang-arrow]');
+      if (!trigger || !menu) return;
+
+      const close = () => {
+        menu.classList.add('hidden');
+        trigger.setAttribute('aria-expanded', 'false');
+        arrow?.classList.remove('rotate-180');
+      };
+
+      const open = () => {
+        menu.classList.remove('hidden');
+        trigger.setAttribute('aria-expanded', 'true');
+        arrow?.classList.add('rotate-180');
+      };
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.contains('hidden') ? open() : close();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!switcher.contains(e.target as Node)) close();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+      });
+    });
+  }
+
+  initLangSwitcher();
+</script>

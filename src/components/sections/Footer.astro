@@ -1,0 +1,59 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<footer
+  class="w-full py-section-gap border-t border-white/5 bg-gradient-to-b from-transparent to-[#0A0A0C]"
+>
+  <div
+    class="flex flex-col md:flex-row justify-between items-center px-container-padding gap-element-gap max-w-[1440px] mx-auto"
+  >
+    <div class="flex flex-col gap-4">
+      <div class="font-headline text-headline-md text-primary">Muztrix</div>
+      <p class="text-body-md font-light text-on-surface-variant max-w-xs opacity-60">
+        {t('footer.tagline')}
+      </p>
+    </div>
+    <div class="flex gap-10">
+      <a
+        href="#"
+        class="text-label-sm text-on-surface-variant hover:text-primary transition-all"
+        >{t('footer.privacy')}</a
+      >
+      <a
+        href="#"
+        class="text-label-sm text-on-surface-variant hover:text-primary transition-all"
+        >{t('footer.terms')}</a
+      >
+      <a
+        href="#"
+        class="text-label-sm text-on-surface-variant hover:text-primary transition-all"
+        >{t('footer.ethics')}</a
+      >
+      <a
+        href="#cta"
+        class="text-label-sm text-on-surface-variant hover:text-primary transition-all"
+        >{t('footer.contact')}</a
+      >
+    </div>
+    <div class="flex gap-6">
+      <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform"
+        >public</span
+      >
+      <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform"
+        >share</span
+      >
+      <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform"
+        >fingerprint</span
+      >
+    </div>
+  </div>
+</footer>

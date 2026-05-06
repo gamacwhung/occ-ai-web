@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/* ========================================
+   Muztrix Design Tokens — Organic Deep Space
+   Source: _reference/DESIGN.md
+   ======================================== */
+@theme {
+  /* ---- Brand & Surface ---- */
+  --color-background: #0a0a0c;
+  --color-surface: #131315;
+  --color-surface-dim: #131315;
+  --color-surface-bright: #39393b;
+  --color-surface-container-lowest: #0e0e10;
+  --color-surface-container-low: #1b1b1d;
+  --color-surface-container: #201f21;
+  --color-surface-container-high: #2a2a2c;
+  --color-surface-container-highest: #353437;
+  --color-surface-variant: #353437;
+  --color-surface-tint: #ffb59a;
+
+  --color-on-background: #e5e1e4;
+  --color-on-surface: #e5e1e4;
+  --color-on-surface-variant: #e4beb1;
+
+  --color-inverse-surface: #e5e1e4;
+  --color-inverse-on-surface: #313032;
+
+  --color-outline: #ab897e;
+  --color-outline-variant: #5b4137;
+
+  /* ---- Primary (Glow Orange) ---- */
+  --color-primary: #ff5a00;
+  --color-on-primary: #5b1b00;
+  --color-primary-container: #ff5a00;
+  --color-on-primary-container: #511700;
+  --color-primary-fixed: #ffdbcf;
+  --color-primary-fixed-dim: #ffb59a;
+  --color-on-primary-fixed: #380d00;
+  --color-on-primary-fixed-variant: #802900;
+  --color-inverse-primary: #a83900;
+
+  /* ---- Secondary (Earthy Obsidian) ---- */
+  --color-secondary: #f7b89c;
+  --color-on-secondary: #4d2612;
+  --color-secondary-container: #6a3e28;
+  --color-on-secondary-container: #e8ab8e;
+  --color-secondary-fixed: #ffdbcc;
+  --color-secondary-fixed-dim: #f7b89c;
+  --color-on-secondary-fixed: #331202;
+  --color-on-secondary-fixed-variant: #673c26;
+
+  /* ---- Tertiary (Obsidian Silver) ---- */
+  --color-tertiary: #c6c6cf;
+  --color-on-tertiary: #2f3037;
+  --color-tertiary-container: #91919a;
+  --color-on-tertiary-container: #292a31;
+  --color-tertiary-fixed: #e2e1eb;
+  --color-tertiary-fixed-dim: #c6c6cf;
+  --color-on-tertiary-fixed: #1a1b22;
+  --color-on-tertiary-fixed-variant: #45464e;
+
+  /* ---- Error ---- */
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  /* ---- Typography ---- */
+  --font-headline: "Epilogue", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --text-headline-xl: 64px;
+  --text-headline-xl--line-height: 1.1;
+  --text-headline-xl--letter-spacing: 0.05em;
+  --text-headline-xl--font-weight: 300;
+
+  --text-headline-lg: 40px;
+  --text-headline-lg--line-height: 1.2;
+  --text-headline-lg--letter-spacing: 0.02em;
+  --text-headline-lg--font-weight: 400;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 1.4;
+  --text-headline-md--font-weight: 500;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.6;
+  --text-body-md--font-weight: 400;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 1.2;
+  --text-label-sm--letter-spacing: 0.1em;
+  --text-label-sm--font-weight: 600;
+
+  /* ---- Radius ---- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* ---- Spacing (named tokens) ---- */
+  --spacing-section-gap: 120px;
+  --spacing-container-padding: 40px;
+  --spacing-element-gap: 24px;
+}
+
+/* ========================================
+   Base Layer
+   ======================================== */
+@layer base {
+  html {
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    color: white;
+  }
+}
+
+/* ========================================
+   Components — DESIGN.md "The Glass Vessel"
+   ======================================== */
+@layer components {
+  .glass-vessel {
+    backdrop-filter: blur(40px);
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .bokeh-blur {
+    filter: blur(80px);
+    border-radius: 50%;
+    position: absolute;
+    z-index: -1;
+    opacity: 0.15;
+  }
+}

@@ -1,0 +1,66 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang, UIKey } from '../../i18n/ui';
+import LangSwitcher from './LangSwitcher.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const localeUrls: Record<Lang, string> = {
+  'zh-TW': '/',
+  en: '/en/',
+  ja: '/ja/',
+};
+
+type NavItem = { labelKey: UIKey; href: string };
+
+const navItems: NavItem[] = [
+  { labelKey: 'nav.about', href: '#vision' },
+  { labelKey: 'nav.virtualHuman', href: '#bento' },
+  { labelKey: 'nav.comic', href: '#features' },
+  { labelKey: 'nav.game', href: '#features' },
+  { labelKey: 'nav.contact', href: '#cta' },
+];
+---
+
+<header
+  class="fixed top-0 w-full z-50 backdrop-blur-md bg-background/10 border-b border-white/5 transition-all duration-500"
+>
+  <nav
+    class="flex justify-between items-center px-container-padding py-6 max-w-[1440px] mx-auto"
+  >
+    <a
+      href={localeUrls[lang]}
+      class="font-headline text-headline-lg font-light tracking-tighter text-primary"
+    >
+      Muztrix
+    </a>
+
+    <div class="hidden md:flex gap-10 items-center">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors"
+          >
+            {t(item.labelKey)}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="flex items-center gap-4">
+      <LangSwitcher lang={lang} />
+      <a
+        href="#cta"
+        class="hidden sm:inline-block bg-primary text-white px-6 py-3 rounded-full text-label-sm uppercase hover:shadow-[0_0_20px_rgba(255,90,0,0.4)] transition-all"
+      >
+        {t('nav.connect')}
+      </a>
+    </div>
+  </nav>
+</header>

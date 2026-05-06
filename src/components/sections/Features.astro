@@ -1,0 +1,83 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang, UIKey } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+type Feature = {
+  icon: string;
+  titleKey: UIKey;
+  descKey: UIKey;
+  highlight?: boolean;
+};
+
+const features: Feature[] = [
+  {
+    icon: 'description',
+    titleKey: 'features.story.title',
+    descKey: 'features.story.desc',
+  },
+  {
+    icon: 'palette',
+    titleKey: 'features.character.title',
+    descKey: 'features.character.desc',
+    highlight: true,
+  },
+  {
+    icon: 'videogame_asset',
+    titleKey: 'features.game.title',
+    descKey: 'features.game.desc',
+  },
+  {
+    icon: 'face_6',
+    titleKey: 'features.virtual.title',
+    descKey: 'features.virtual.desc',
+  },
+  {
+    icon: 'devices',
+    titleKey: 'features.platform.title',
+    descKey: 'features.platform.desc',
+  },
+];
+---
+
+<section id="features" class="py-section-gap px-container-padding">
+  <div class="max-w-[1440px] mx-auto">
+    <div class="mb-16">
+      <h2 class="font-headline text-headline-lg text-white mb-4 tracking-tight">
+        {t('features.title')}
+      </h2>
+      <p class="text-body-md text-on-surface-variant opacity-70 max-w-2xl">
+        {t('features.subtitle')}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      {
+        features.map((f) => (
+          <div
+            class:list={[
+              'glass-vessel p-8 rounded-xl hover:border-primary/40 transition-all group',
+              f.highlight && 'border-primary/20',
+            ]}
+          >
+            <span class="material-symbols-outlined text-primary text-3xl mb-6 block">
+              {f.icon}
+            </span>
+            <h3 class="font-headline text-lg mb-2 text-white">
+              {t(f.titleKey)}
+            </h3>
+            <p class="text-sm text-on-surface-variant opacity-70 leading-relaxed">
+              {t(f.descKey)}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
