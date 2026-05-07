@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from '../../i18n/utils';
 import type { Lang, UIKey } from '../../i18n/ui';
+import MuztrixGlyph from '../MuztrixGlyph.astro';
 import LangSwitcher from './LangSwitcher.astro';
 
 interface Props {
@@ -19,48 +20,76 @@ const localeUrls: Record<Lang, string> = {
 type NavItem = { labelKey: UIKey; href: string };
 
 const navItems: NavItem[] = [
-  { labelKey: 'nav.about', href: '#vision' },
-  { labelKey: 'nav.virtualHuman', href: '#bento' },
-  { labelKey: 'nav.comic', href: '#features' },
-  { labelKey: 'nav.game', href: '#features' },
-  { labelKey: 'nav.contact', href: '#cta' },
+  { labelKey: 'nav.solutions', href: '#solutions' },
+  { labelKey: 'nav.about', href: '#about' },
+  { labelKey: 'nav.virtualHuman', href: '#virtual' },
+  { labelKey: 'nav.comic', href: '#comic' },
+  { labelKey: 'nav.game', href: '#game' },
 ];
 ---
 
 <header
-  class="fixed top-0 w-full z-50 backdrop-blur-md bg-background/10 border-b border-white/5 transition-all duration-500"
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 px-5 py-5 transition-all duration-500"
+  style="background: transparent;"
 >
-  <nav
-    class="flex justify-between items-center px-container-padding py-6 max-w-[1440px] mx-auto"
+  <div
+    class="flex items-center justify-between max-w-[1440px] mx-auto px-5"
   >
-    <a
-      href={localeUrls[lang]}
-      class="font-headline text-headline-lg font-light tracking-tighter text-primary"
-    >
-      Muztrix
+    <a href={localeUrls[lang]} class="wordmark">
+      <MuztrixGlyph size={26} />
+      <span>Muztrix</span>
     </a>
 
-    <div class="hidden md:flex gap-10 items-center">
+    <nav class="hidden md:flex gap-9 mx-header-nav">
       {
-        navItems.map((item) => (
+        navItems.map((it) => (
           <a
-            href={item.href}
-            class="text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors"
+            href={it.href}
+            class="text-[12px] font-medium uppercase transition-colors duration-200"
+            style="letter-spacing: 0.16em; color: var(--color-bone-2); text-decoration: none;"
+            onmouseenter="this.style.color='var(--color-cinnabar)'"
+            onmouseleave="this.style.color='var(--color-bone-2)'"
           >
-            {t(item.labelKey)}
+            {t(it.labelKey)}
           </a>
         ))
       }
-    </div>
+    </nav>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-5">
       <LangSwitcher lang={lang} />
       <a
-        href="#cta"
-        class="hidden sm:inline-block bg-primary text-white px-6 py-3 rounded-full text-label-sm uppercase hover:shadow-[0_0_20px_rgba(255,90,0,0.4)] transition-all"
+        href="#contact"
+        class="hidden sm:inline-flex btn-v2 btn-v2--primary"
+        style="padding: 12px 22px; font-size: 11px;"
       >
-        {t('nav.connect')}
+        {t('nav.contact')}
+        <span class="arrow"></span>
       </a>
     </div>
-  </nav>
+  </div>
 </header>
+
+<script>
+  // Scroll-aware header background
+  const header = document.getElementById('site-header');
+  if (header) {
+    const onScroll = () => {
+      if (window.scrollY > 40) {
+        header.style.background = 'rgba(14,11,8,0.78)';
+        header.style.backdropFilter = 'blur(20px) saturate(140%)';
+        (header.style as any).WebkitBackdropFilter =
+          'blur(20px) saturate(140%)';
+        header.style.borderBottom = '1px solid var(--bone-line)';
+      } else {
+        header.style.background = 'transparent';
+        header.style.backdropFilter = 'none';
+        (header.style as any).WebkitBackdropFilter = 'none';
+        header.style.borderBottom = '1px solid transparent';
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

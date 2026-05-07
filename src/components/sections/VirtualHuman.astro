@@ -1,0 +1,122 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+import ChatDemo from '../islands/ChatDemo.tsx';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const matrix = [
+  { k: t('virtual.matrix.1k'), v: t('virtual.matrix.1v') },
+  { k: t('virtual.matrix.2k'), v: t('virtual.matrix.2v') },
+  { k: t('virtual.matrix.3k'), v: t('virtual.matrix.3v') },
+  { k: t('virtual.matrix.4k'), v: t('virtual.matrix.4v') },
+];
+
+const signals = [
+  '性別 · 女',
+  '年齡 · 22-28',
+  '表情 · 微笑',
+  '凝視 · 0.8s',
+  '情緒 · 好奇',
+  '關鍵字 · 你看得到',
+];
+---
+
+<section
+  id="virtual"
+  class="relative mx-section overflow-hidden"
+  style="padding: 160px 48px; background: var(--color-ink);"
+>
+  <div
+    class="absolute"
+    style="left: -10%; top: 20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(27,40,64,0.5), transparent 60%); filter: blur(80px);"
+  >
+  </div>
+
+  <div style="max-width: 1440px; margin: 0 auto; position: relative;">
+    <div
+      class="mx-two-col grid items-center"
+      style="grid-template-columns: 1fr 1fr; gap: 80px;"
+    >
+      <!-- Left — copy -->
+      <div>
+        <div class="flex items-center gap-4 mb-9">
+          <span class="num-tag">{t('virtual.section')}</span>
+          <span style="flex: 1; height: 1px; background: var(--bone-line);"
+          ></span>
+        </div>
+
+        <h2 class="h1-display mb-8" style="color: var(--color-bone);">
+          {t('virtual.title.l1')}<br />
+          <span style="color: var(--color-cinnabar);"
+            >{t('virtual.title.l2')}</span
+          >{t('virtual.title.l3')}
+        </h2>
+
+        <p class="body-lg-v2 mb-8" style="max-width: 520px;">
+          {t('virtual.body1')}
+        </p>
+
+        <p class="body-md-v2 mb-12" style="max-width: 520px;">
+          {t('virtual.body2')}
+        </p>
+
+        <!-- Capability matrix -->
+        <div
+          class="grid"
+          style="grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid var(--bone-line);"
+        >
+          {
+            matrix.map((c, i) => (
+              <div
+                style={`padding: 20px 22px; border-right: ${i % 2 === 0 ? '1px solid var(--bone-line)' : 'none'}; border-bottom: ${i < 2 ? '1px solid var(--bone-line)' : 'none'};`}
+              >
+                <div
+                  style="font-size: 10px; letter-spacing: 0.25em; color: var(--color-cinnabar); margin-bottom: 8px;"
+                >
+                  {c.k}
+                </div>
+                <div class="body-sm-v2" style="color: var(--color-bone);">
+                  {c.v}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Right — interactive demo -->
+      <div style="position: relative;">
+        <ChatDemo
+          welcome1={t('virtual.demo.welcome1')}
+          welcome2={t('virtual.demo.welcome2')}
+          welcome3={t('virtual.demo.welcome3')}
+          placeholder={t('virtual.demo.placeholder')}
+          send={t('virtual.demo.send')}
+          perceptionLabel={t('virtual.demo.perception')}
+          signals={signals}
+          client:visible
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @container page (max-width: 600px) {
+    .mx-vh-perception {
+      flex-direction: column !important;
+    }
+    .mx-vh-avatar {
+      width: 100% !important;
+      height: 200px !important;
+      border-right: none !important;
+      border-bottom: 1px solid var(--bone-line) !important;
+    }
+  }
+</style>

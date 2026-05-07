@@ -1,0 +1,149 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+import ComicStudio from '../islands/ComicStudio.tsx';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const stages = [
+  {
+    num: '01' as const,
+    label: t('comic.01.label'),
+    en: t('comic.01.en'),
+    title: t('comic.01.title'),
+    desc: t('comic.01.desc'),
+    meta: [t('comic.01.m1'), t('comic.01.m2'), t('comic.01.m3')] as [string, string, string],
+  },
+  {
+    num: '02' as const,
+    label: t('comic.02.label'),
+    en: t('comic.02.en'),
+    title: t('comic.02.title'),
+    desc: t('comic.02.desc'),
+    meta: [t('comic.02.m1'), t('comic.02.m2'), t('comic.02.m3')] as [string, string, string],
+  },
+  {
+    num: '03' as const,
+    label: t('comic.03.label'),
+    en: t('comic.03.en'),
+    title: t('comic.03.title'),
+    desc: t('comic.03.desc'),
+    meta: [t('comic.03.m1'), t('comic.03.m2'), t('comic.03.m3')] as [string, string, string],
+  },
+  {
+    num: '04' as const,
+    label: t('comic.04.label'),
+    en: t('comic.04.en'),
+    title: t('comic.04.title'),
+    desc: t('comic.04.desc'),
+    meta: [t('comic.04.m1'), t('comic.04.m2'), t('comic.04.m3')] as [string, string, string],
+  },
+];
+---
+
+<section
+  id="comic"
+  class="relative mx-section overflow-hidden"
+  style="padding: 160px 48px;"
+>
+  <div style="max-width: 1440px; margin: 0 auto;">
+    <!-- Header -->
+    <div
+      class="mx-comic-header flex justify-between items-end mb-16"
+      style="gap: 48px;"
+    >
+      <div style="max-width: 760px;">
+        <div class="flex items-center gap-4 mb-7">
+          <span class="num-tag">{t('comic.section')}</span>
+          <span style="width: 80px; height: 1px; background: var(--bone-line);"
+          ></span>
+        </div>
+        <h2 class="h1-display">
+          {t('comic.title.l1')}<br />
+          <span style="color: var(--color-gold); font-style: italic; font-weight: 200;"
+            >{t('comic.title.l2')}</span
+          >
+        </h2>
+      </div>
+      <p class="body-md-v2" style="max-width: 360px; margin-bottom: 8px;">
+        {t('comic.subtitle')}
+      </p>
+    </div>
+
+    <ComicStudio
+      stages={stages}
+      capabilitiesLabel="CAPABILITIES"
+      client:visible
+    />
+
+    <!-- Bottom flow strip -->
+    <div
+      class="mx-comic-bottom flex items-center mt-6"
+      style="gap: 24px; padding: 18px 28px; border: 1px solid var(--bone-line);"
+    >
+      <span
+        style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.25em; color: var(--color-cinnabar);"
+      >
+        {t('comic.flow')}
+      </span>
+      <span style="flex: 1; height: 1px; background: var(--bone-line);"></span>
+      <span class="body-sm-v2" style="color: var(--color-bone-2);">
+        {t('comic.flow.note')}
+      </span>
+      <a
+        href="#contact"
+        class="btn-v2 btn-v2--ghost"
+        style="padding: 10px 18px; font-size: 11px;"
+      >
+        {t('comic.cta')}
+        <span class="arrow"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  @container page (max-width: 900px) {
+    .mx-comic-header {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+    }
+    .mx-comic-tabs {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .mx-comic-tabs button:nth-child(3) {
+      border-left: none !important;
+      border-top: 1px solid var(--bone-line) !important;
+    }
+    .mx-comic-tabs button:nth-child(4) {
+      border-top: 1px solid var(--bone-line) !important;
+    }
+    .mx-comic-canvas {
+      grid-template-columns: 1fr !important;
+    }
+    .mx-comic-canvas > div:first-child {
+      border-right: none !important;
+      border-bottom: 1px solid var(--bone-line) !important;
+    }
+    .mx-comic-bottom {
+      flex-wrap: wrap !important;
+    }
+  }
+  @container page (max-width: 600px) {
+    .mx-comic-tabs {
+      grid-template-columns: 1fr !important;
+    }
+    .mx-comic-tabs button {
+      border-left: none !important;
+      border-top: 1px solid var(--bone-line) !important;
+    }
+    .mx-comic-tabs button:first-child {
+      border-top: none !important;
+    }
+  }
+</style>

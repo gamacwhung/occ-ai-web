@@ -1,0 +1,163 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section
+  id="about"
+  class="relative mx-section"
+  style="padding: 180px 48px; background: linear-gradient(180deg, var(--color-ink) 0%, #0a0805 100%);"
+>
+  <div style="max-width: 1440px; margin: 0 auto;">
+    <div
+      class="mx-two-col grid items-center"
+      style="grid-template-columns: 1fr 1fr; gap: 96px;"
+    >
+      <!-- Left — manifesto -->
+      <div>
+        <div class="flex items-center gap-4 mb-9">
+          <span class="num-tag">{t('about.section')}</span>
+          <span style="flex: 1; height: 1px; background: var(--bone-line);"
+          ></span>
+        </div>
+
+        <h2 class="h1-display mb-12" style="color: var(--color-bone);">
+          {t('about.title.l1')}
+          <span class="serif-accent" style="color: var(--color-cinnabar);"
+            >{t('about.title.l1b')}</span
+          >
+          {t('about.title.l1c')}<br />
+          {t('about.title.l2')}<br />
+          <span class="serif-accent" style="color: var(--color-gold);"
+            >{t('about.title.l3')}</span
+          >{t('about.title.l3b')}
+        </h2>
+
+        <p class="body-lg-v2 mb-7" style="max-width: 520px;">
+          {t('about.body1')}
+        </p>
+        <p class="body-md-v2 mb-14" style="max-width: 520px;">
+          {t('about.body2')}
+        </p>
+
+        <!-- Pillars -->
+        <div
+          class="mx-about-pillars grid gap-8 pt-9"
+          style="grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--bone-line);"
+        >
+          {
+            [
+              { k: t('about.pillar1.k'), v: t('about.pillar1.v') },
+              { k: t('about.pillar2.k'), v: t('about.pillar2.v') },
+              { k: t('about.pillar3.k'), v: t('about.pillar3.v') },
+            ].map((p) => (
+              <div>
+                <div
+                  style="width: 24px; height: 1px; background: var(--color-cinnabar); margin-bottom: 14px;"
+                />
+                <h4
+                  style="font-family: var(--font-headline); font-size: 16px; font-weight: 500; color: var(--color-bone); margin: 0 0 8px;"
+                >
+                  {p.k}
+                </h4>
+                <p class="body-sm-v2" style="margin: 0;">
+                  {p.v}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Right — asymmetric portrait grid -->
+      <div class="mx-about-portrait relative" style="height: 700px;">
+        <!-- Vertical CJK -->
+        <div
+          class="cjk-vert absolute flex items-center"
+          style="right: -8px; top: 0; bottom: 0;"
+        >
+          {t('about.cjk')}
+        </div>
+
+        <!-- Big portrait -->
+        <div
+          class="absolute overflow-hidden"
+          style="left: 0; top: 40px; width: 70%; height: 460px; border: 1px solid var(--bone-line);"
+        >
+          <img
+            src="/images/vision-face.jpg"
+            alt=""
+            style="width: 100%; height: 100%; object-fit: cover; filter: contrast(1.05) saturate(0.85);"
+          />
+          <div
+            class="absolute inset-0"
+            style="background: linear-gradient(135deg, rgba(255,90,31,0.18), transparent 60%);"
+          >
+          </div>
+          <div
+            class="absolute"
+            style="left: 16px; bottom: 14px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--color-bone);"
+          >
+            {t('about.portrait.label')}
+          </div>
+        </div>
+
+        <!-- Stat block — bottom right -->
+        <div
+          class="absolute"
+          style="right: 30px; bottom: 0; width: 60%; background: var(--color-ink-2); border: 1px solid var(--bone-line); padding: 36px 32px;"
+        >
+          <div class="eyebrow eyebrow--muted mb-5">
+            {t('about.stat.eyebrow')}
+          </div>
+          <div
+            style="font-family: var(--font-headline); font-size: 64px; font-weight: 200; color: var(--color-cinnabar); line-height: 0.95; letter-spacing: -0.03em;"
+          >
+            30<span style="color: var(--color-bone);">{t('about.stat.unit')}</span>
+          </div>
+          <p class="body-sm-v2" style="margin-top: 16px;">
+            {t('about.stat.body')}
+          </p>
+        </div>
+
+        <!-- Top-right card -->
+        <div
+          class="absolute"
+          style="right: 60px; top: 0; padding: 20px 24px; background: var(--color-ink-3); border: 1px solid var(--color-cinnabar); max-width: 220px;"
+        >
+          <div
+            style="font-size: 10px; letter-spacing: 0.25em; color: var(--color-cinnabar); margin-bottom: 8px;"
+          >
+            {t('about.ethical.label')}
+          </div>
+          <p class="body-sm-v2" style="margin: 0; color: var(--color-bone);">
+            {t('about.ethical.body')}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @container page (max-width: 900px) {
+    .mx-two-col {
+      grid-template-columns: 1fr !important;
+      gap: 56px !important;
+    }
+    .mx-about-portrait {
+      height: 440px !important;
+    }
+    .mx-about-pillars {
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+    }
+  }
+</style>

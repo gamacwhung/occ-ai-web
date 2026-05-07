@@ -1,0 +1,187 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+import MuztrixGlyph from '../MuztrixGlyph.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const cols = [
+  {
+    h: t('footer.col1.h'),
+    items: [
+      t('footer.col1.i1'),
+      t('footer.col1.i2'),
+      t('footer.col1.i3'),
+      t('footer.col1.i4'),
+    ],
+  },
+  {
+    h: t('footer.col2.h'),
+    items: [
+      t('footer.col2.i1'),
+      t('footer.col2.i2'),
+      t('footer.col2.i3'),
+      t('footer.col2.i4'),
+    ],
+  },
+  {
+    h: t('footer.col3.h'),
+    items: [t('footer.col3.i1'), t('footer.col3.i2'), t('footer.col3.i3')],
+  },
+];
+---
+
+<section
+  id="contact"
+  class="relative mx-section overflow-hidden"
+  style="padding: 180px 48px 60px;"
+>
+  <div
+    class="absolute inset-0"
+    style="z-index: 0; background: radial-gradient(ellipse at 50% 0%, rgba(255,90,31,0.18), transparent 60%);"
+  >
+  </div>
+
+  <div
+    style="max-width: 1440px; margin: 0 auto; position: relative; z-index: 2;"
+  >
+    <!-- CTA -->
+    <div
+      class="mx-cta-row grid items-end"
+      style="grid-template-columns: 1fr auto; gap: 80px; padding-bottom: 100px; border-bottom: 1px solid var(--bone-line);"
+    >
+      <div>
+        <div class="flex items-center gap-4 mb-7">
+          <span class="num-tag">{t('cta.section')}</span>
+          <span
+            style="width: 80px; height: 1px; background: var(--bone-line);"
+          ></span>
+        </div>
+        <h2 class="h-display" style="margin: 0; color: var(--color-bone);">
+          {t('cta.title.l1')}<br />
+          <span style="color: var(--color-cinnabar);">{t('cta.title.l2')}</span>
+          <br />
+          <span style="font-style: italic; font-weight: 200; color: var(--color-gold);"
+            >{t('cta.title.l3')}</span
+          >
+        </h2>
+        <p
+          class="body-lg-v2"
+          style="max-width: 580px; margin-top: 36px;"
+        >
+          {t('cta.body')}
+        </p>
+      </div>
+      <div style="padding-bottom: 16px;">
+        <a
+          href="mailto:yalihuang@gamania.com"
+          class="btn-v2 btn-v2--primary"
+          style="padding: 24px 36px; font-size: 13px;"
+        >
+          {t('cta.button')}
+          <span class="arrow"></span>
+        </a>
+        <div
+          style="margin-top: 18px; font-family: var(--font-mono); font-size: 11px; color: var(--color-bone-3); letter-spacing: 0.1em;"
+        >
+          yalihuang@gamania.com
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="padding-top: 48px;">
+      <div
+        class="mx-footer-cols grid mb-16"
+        style="grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;"
+      >
+        <div>
+          <a class="wordmark wordmark--lg" href="#hero">
+            <MuztrixGlyph size={44} />
+            <span>Muztrix</span>
+          </a>
+          <p
+            class="body-sm-v2"
+            style="margin-top: 24px; max-width: 320px;"
+          >
+            {t('footer.tagline')}
+          </p>
+        </div>
+        {
+          cols.map((c) => (
+            <div>
+              <h5
+                style="font-family: var(--font-headline); font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-cinnabar); margin: 0 0 18px;"
+              >
+                {c.h}
+              </h5>
+              <ul
+                style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;"
+              >
+                {c.items.map((it) => (
+                  <li>
+                    <a
+                      href="#"
+                      style="color: var(--color-bone-2); text-decoration: none; font-size: 13px;"
+                    >
+                      {it}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Big outlined wordmark -->
+      <div
+        style="font-family: var(--font-headline); font-weight: 700; font-size: clamp(80px, 18vw, 280px); line-height: 0.85; letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1px var(--bone-line); margin: 40px 0 32px; display: flex; align-items: baseline; gap: 12px;"
+      >
+        MUZTRIX
+        <span
+          style="font-size: 0.15em; -webkit-text-stroke: none; color: var(--color-cinnabar); letter-spacing: 0.2em;"
+          >·</span
+        >
+      </div>
+
+      <div
+        class="mx-footer-bottom flex justify-between items-center"
+        style="padding-top: 24px; border-top: 1px solid var(--bone-line); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--color-bone-3);"
+      >
+        <span>{t('footer.copyright')}</span>
+        <span>TPE · TKY · TPE</span>
+        <span>v2.0 · DESIGN/2026.05</span>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<style>
+  @container page (max-width: 900px) {
+    .mx-cta-row {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+      padding-bottom: 64px !important;
+    }
+    .mx-footer-cols {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 32px !important;
+    }
+    .mx-footer-bottom {
+      flex-direction: column !important;
+      gap: 12px !important;
+      text-align: center;
+    }
+  }
+  @container page (max-width: 600px) {
+    .mx-footer-cols {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

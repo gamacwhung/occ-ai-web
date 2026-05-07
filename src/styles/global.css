@@ -106,6 +106,40 @@
   --spacing-section-gap: 120px;
   --spacing-container-padding: 40px;
   --spacing-element-gap: 24px;
+
+  /* ============================================================
+     v2 — Editorial Cinematic palette
+     Extracted from the Miyaki character (Tang fantasy)
+     ============================================================ */
+  --color-ink: #0e0b08;
+  --color-ink-2: #15110d;
+  --color-ink-3: #1d1813;
+  --color-ink-4: #2a2218;
+
+  --color-cinnabar: #ff5a1f;
+  --color-cinnabar-deep: #c9410f;
+  --color-cinnabar-soft: #ff8554;
+  --color-ember: #ffb89a;
+
+  --color-imperial: #1b2840;
+  --color-imperial-2: #2a3a5e;
+
+  --color-gold: #d9b872;
+  --color-gold-soft: #efd9a3;
+  --color-jade: #5b8c7a;
+
+  --color-bone: #f4ecdc;
+  --color-bone-2: #cdc4b1;
+  --color-bone-3: #8a826f;
+
+  /* v2 fonts */
+  --font-serif-tc: "Noto Serif TC", "Songti TC", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* CSS variable for bone-line (rgba — kept outside @theme so utility classes work) */
+:root {
+  --bone-line: rgba(244, 236, 220, 0.08);
 }
 
 /* ========================================
@@ -146,6 +180,163 @@
     position: absolute;
     z-index: -1;
     opacity: 0.15;
+  }
+
+  /* ============================================================
+     v2 — Editorial Cinematic utilities
+     ============================================================ */
+
+  /* Eyebrow label — small, uppercase, wide-tracked */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-cinnabar);
+  }
+  .eyebrow--muted {
+    color: var(--color-bone-3);
+  }
+
+  /* Display + heading scales */
+  .h-display {
+    font-family: var(--font-headline);
+    font-weight: 200;
+    font-size: clamp(64px, 9vw, 144px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+  .h1-display {
+    font-family: var(--font-headline);
+    font-weight: 300;
+    font-size: clamp(48px, 5.6vw, 88px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+  .h2-display {
+    font-family: var(--font-headline);
+    font-weight: 300;
+    font-size: clamp(36px, 3.6vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+  .h3-display {
+    font-family: var(--font-headline);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+
+  /* Body sizes */
+  .body-lg-v2 { font-size: 18px; line-height: 1.65; color: var(--color-bone-2); }
+  .body-md-v2 { font-size: 15px; line-height: 1.65; color: var(--color-bone-2); }
+  .body-sm-v2 { font-size: 13px; line-height: 1.55; color: var(--color-bone-2); }
+
+  .serif-accent {
+    font-family: var(--font-serif-tc);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* Vertical CJK strip — uses Noto Serif TC, wide letter-spacing */
+  .cjk-vert {
+    writing-mode: vertical-rl;
+    font-family: var(--font-serif-tc);
+    font-size: 12px;
+    letter-spacing: 0.6em;
+    color: var(--color-bone-3);
+  }
+
+  /* Mono number tag — small, wide-tracked, JetBrains Mono */
+  .num-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--color-bone-3);
+  }
+
+  /* Hairline divider — fades at both ends */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--bone-line), transparent);
+  }
+
+  /* Subtle film grain overlay (use on a relative element) */
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.45;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.45 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* Square/sharp button system (no rounded corners) */
+  .btn-v2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 28px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all .35s cubic-bezier(.22,1,.36,1);
+    text-decoration: none;
+  }
+  .btn-v2--primary {
+    background: var(--color-cinnabar);
+    color: var(--color-ink);
+    border-color: var(--color-cinnabar);
+  }
+  .btn-v2--primary:hover {
+    background: var(--color-bone);
+    border-color: var(--color-bone);
+    transform: translateY(-2px);
+  }
+  .btn-v2--ghost {
+    background: transparent;
+    color: var(--color-bone);
+    border-color: var(--bone-line);
+  }
+  .btn-v2--ghost:hover {
+    border-color: var(--color-cinnabar);
+    color: var(--color-cinnabar);
+  }
+  .btn-v2 .arrow {
+    width: 14px;
+    height: 14px;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    display: inline-block;
+  }
+
+  /* Wordmark — logo + text combo */
+  .wordmark {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    font-size: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-bone);
+    text-decoration: none;
+  }
+  .wordmark--lg {
+    font-size: 40px;
+    gap: 14px;
   }
 
   /* ============================================================

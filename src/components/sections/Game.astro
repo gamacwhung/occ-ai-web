@@ -1,0 +1,100 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+import NPCInspector from '../islands/NPCInspector.tsx';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const npcs: [
+  { name: string; state: string; mood: string },
+  { name: string; state: string; mood: string },
+  { name: string; state: string; mood: string },
+] = [
+  { name: t('game.npc1.name'), state: t('game.npc1.state'), mood: t('game.npc1.mood') },
+  { name: t('game.npc2.name'), state: t('game.npc2.state'), mood: t('game.npc2.mood') },
+  { name: t('game.npc3.name'), state: t('game.npc3.state'), mood: t('game.npc3.mood') },
+];
+
+const memories: [string, string, string] = [
+  t('game.memory1'),
+  t('game.memory2'),
+  t('game.memory3'),
+];
+---
+
+<section
+  id="game"
+  class="relative mx-section"
+  style="padding: 160px 48px; background: linear-gradient(180deg, var(--color-ink) 0%, #0a0805 100%);"
+>
+  <div style="max-width: 1440px; margin: 0 auto;">
+    <div
+      class="mx-game-grid grid items-start"
+      style="grid-template-columns: 0.8fr 1.2fr; gap: 80px;"
+    >
+      <!-- Left — copy (sticky) -->
+      <div class="mx-game-sticky" style="position: sticky; top: 120px;">
+        <div class="flex items-center gap-4 mb-7">
+          <span class="num-tag">{t('game.section')}</span>
+          <span style="flex: 1; height: 1px; background: var(--bone-line);"
+          ></span>
+        </div>
+        <h2 class="h1-display mb-8">
+          {t('game.title.l1')}<br />
+          <span style="color: var(--color-cinnabar);">{t('game.title.l2')}</span>
+          {t('game.title.l2b')}<br />
+          <span style="font-style: italic; font-weight: 200; color: var(--color-gold);"
+            >{t('game.title.l3')}</span
+          >
+        </h2>
+        <p class="body-md-v2 mb-9">
+          {t('game.body')}
+        </p>
+        <ul
+          class="flex flex-col gap-3.5"
+          style="list-style: none; padding: 0; margin: 0;"
+        >
+          {
+            [t('game.p1'), t('game.p2'), t('game.p3')].map((p) => (
+              <li
+                class="flex items-center"
+                style="gap: 14px; font-size: 14px; color: var(--color-bone-2);"
+              >
+                <span style="width: 18px; height: 1px; background: var(--color-cinnabar);" />
+                {p}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Right — game console mock -->
+      <NPCInspector npcs={npcs} memories={memories} client:visible />
+    </div>
+  </div>
+</section>
+
+<style>
+  @container page (max-width: 900px) {
+    .mx-game-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .mx-game-sticky {
+      position: static !important;
+    }
+  }
+  @container page (max-width: 600px) {
+    .mx-game-detail {
+      grid-template-columns: 1fr !important;
+    }
+    .mx-game-detail > div:first-child {
+      border-right: none !important;
+      border-bottom: 1px solid var(--bone-line) !important;
+    }
+  }
+</style>

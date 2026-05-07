@@ -1,0 +1,250 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang, UIKey } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+type Card = {
+  num: '01' | '02' | '03' | '04';
+  titleKey: UIKey;
+  tagKey: UIKey;
+  descKey: UIKey;
+  tags: UIKey[];
+  glow?: boolean;
+};
+
+const cards: Card[] = [
+  {
+    num: '01',
+    titleKey: 'solutions.01.title',
+    tagKey: 'solutions.01.tag',
+    descKey: 'solutions.01.desc',
+    tags: ['solutions.01.t1', 'solutions.01.t2', 'solutions.01.t3'],
+  },
+  {
+    num: '02',
+    titleKey: 'solutions.02.title',
+    tagKey: 'solutions.02.tag',
+    descKey: 'solutions.02.desc',
+    tags: ['solutions.02.t1', 'solutions.02.t2', 'solutions.02.t3'],
+  },
+  {
+    num: '03',
+    titleKey: 'solutions.03.title',
+    tagKey: 'solutions.03.tag',
+    descKey: 'solutions.03.desc',
+    tags: ['solutions.03.t1', 'solutions.03.t2', 'solutions.03.t3'],
+  },
+  {
+    num: '04',
+    titleKey: 'solutions.04.title',
+    tagKey: 'solutions.04.tag',
+    descKey: 'solutions.04.desc',
+    tags: ['solutions.04.t1', 'solutions.04.t2', 'solutions.04.t3'],
+    glow: true,
+  },
+];
+---
+
+<section
+  id="solutions"
+  class="relative px-12 mx-section"
+  style="padding: 160px 48px 140px;"
+>
+  <div style="max-width: 1440px; margin: 0 auto;">
+    <!-- Section header — 1fr 1.5fr two-column with eyebrow + h1 + subtitle -->
+    <div
+      class="mx-section-head grid items-end mb-24"
+      style="grid-template-columns: 1fr 1.5fr; gap: 80px;"
+    >
+      <div>
+        <div class="flex items-center gap-4 mb-7">
+          <span class="num-tag">{t('solutions.section')}</span>
+          <span style="flex: 1; height: 1px; background: var(--bone-line);"
+          ></span>
+        </div>
+        <h2 class="h1-display" style="color: var(--color-bone);">
+          {t('solutions.title.line1')}<br />
+          <span style="font-style: italic; font-weight: 200; color: var(--color-gold);"
+            >{t('solutions.title.line2')}</span
+          >
+        </h2>
+      </div>
+      <p
+        class="body-lg-v2"
+        style="max-width: 520px; padding-bottom: 12px;"
+      >
+        {t('solutions.subtitle')}
+      </p>
+    </div>
+
+    <!-- Editorial 2x2 grid (1px gaps act as dividers) -->
+    <div
+      class="mx-solutions-grid grid"
+      style="grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--bone-line); border: 1px solid var(--bone-line);"
+    >
+      {
+        cards.map((c) => (
+          <article
+            class:list={[
+              'mx-solution-card group relative',
+              c.glow && 'is-glow',
+            ]}
+          >
+            {/* Hover wash */}
+            <div class="card-wash" />
+
+            {/* Big background numeral */}
+            <div class:list={['big-num', c.glow && 'big-num-glow']}>
+              {c.num}
+            </div>
+
+            <div class="relative z-[2] flex flex-col h-full" style="min-height: 360px;">
+              <div style="margin-bottom: auto;">
+                <div class="flex items-center gap-3 mb-7">
+                  <span
+                    style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--color-cinnabar);"
+                  >
+                    {c.num}
+                  </span>
+                  <span style="width: 24px; height: 1px; background: var(--bone-line);" />
+                  <span class="eyebrow eyebrow--muted">{t(c.tagKey)}</span>
+                </div>
+                <h3 class="solution-title">{t(c.titleKey)}</h3>
+                <p class="body-md-v2" style="max-width: 440px; margin: 0;">
+                  {t(c.descKey)}
+                </p>
+              </div>
+
+              <div
+                class="flex gap-2 mt-11 flex-wrap"
+              >
+                {c.tags.map((tag) => (
+                  <span
+                    style="font-size: 11px; letter-spacing: 0.1em; padding: 6px 12px; border: 1px solid var(--bone-line); color: var(--color-bone-2); font-family: var(--font-serif-tc);"
+                  >
+                    {t(tag)}
+                  </span>
+                ))}
+              </div>
+
+              {/* Hover underline */}
+              <div class="hover-line" />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .mx-solution-card {
+    background: var(--color-ink);
+    padding: 72px 56px 64px;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+    min-height: 460px;
+  }
+
+  .card-wash {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 80% 20%,
+      rgba(255, 90, 31, 0.12),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+  .mx-solution-card:hover .card-wash {
+    opacity: 1;
+  }
+
+  .big-num {
+    position: absolute;
+    bottom: -28px;
+    right: 32px;
+    font-family: var(--font-headline);
+    font-size: 200px;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(244, 236, 220, 0.06);
+    line-height: 1;
+    letter-spacing: -0.06em;
+    transition: all 0.5s;
+    pointer-events: none;
+  }
+  .big-num-glow {
+    -webkit-text-stroke-color: rgba(255, 138, 90, 0.35);
+    filter: drop-shadow(0 0 18px rgba(255, 90, 31, 0.45));
+    animation: mxGlow 3.6s ease-in-out infinite;
+  }
+  .mx-solution-card:hover .big-num {
+    -webkit-text-stroke-color: var(--color-cinnabar);
+  }
+  .mx-solution-card:hover .big-num-glow {
+    filter: drop-shadow(0 0 28px rgba(255, 90, 31, 0.65));
+  }
+
+  @keyframes mxGlow {
+    0%, 100% { filter: drop-shadow(0 0 18px rgba(255, 90, 31, 0.4)); }
+    50% { filter: drop-shadow(0 0 32px rgba(255, 90, 31, 0.6)); }
+  }
+
+  .solution-title {
+    font-family: var(--font-headline);
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--color-bone);
+    margin: 0 0 32px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    transform: translateX(0);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .mx-solution-card:hover .solution-title {
+    transform: translateX(8px);
+  }
+
+  .hover-line {
+    position: absolute;
+    bottom: -64px;
+    left: -56px;
+    right: -56px;
+    height: 2px;
+    background: var(--color-cinnabar);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .mx-solution-card:hover .hover-line {
+    transform: scaleX(1);
+  }
+
+  /* Container responsive */
+  @container page (max-width: 900px) {
+    .mx-solution-card {
+      padding: 40px 28px !important;
+      min-height: auto !important;
+    }
+    .big-num {
+      font-size: 96px !important;
+      top: 24px !important;
+      right: 24px !important;
+      bottom: auto !important;
+    }
+    .solution-title {
+      font-size: 40px !important;
+      padding-right: 80px;
+    }
+  }
+</style>

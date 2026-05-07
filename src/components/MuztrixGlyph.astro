@@ -1,0 +1,58 @@
+---
+/**
+ * Muztrix glyph mark — "M" rendered as twin pillars with a cinnabar sun rising
+ * between them. Reads as: M for Muztrix, and a horizon/portal for AI x content.
+ */
+interface Props {
+  size?: number;
+  accent?: string;
+  stroke?: string;
+}
+
+const {
+  size = 26,
+  accent = 'var(--color-cinnabar)',
+  stroke = 'var(--color-bone)',
+} = Astro.props;
+---
+
+<svg
+  viewBox="0 0 32 32"
+  width={size}
+  height={size}
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  style="display: block; flex-shrink: 0;"
+>
+  <!-- Outer rounded square frame — like a stamp/seal -->
+  <rect
+    x="1.5"
+    y="1.5"
+    width="29"
+    height="29"
+    rx="2"
+    stroke={stroke}
+    stroke-opacity="0.25"
+    stroke-width="1"
+  />
+  <!-- Left pillar -->
+  <path
+    d="M7 24 L7 8 L11 8 L16 14"
+    stroke={stroke}
+    stroke-width="2.2"
+    stroke-linecap="square"
+    stroke-linejoin="miter"
+  />
+  <!-- Right pillar -->
+  <path
+    d="M25 24 L25 8 L21 8 L16 14"
+    stroke={stroke}
+    stroke-width="2.2"
+    stroke-linecap="square"
+    stroke-linejoin="miter"
+  />
+  <!-- Cinnabar sun — sits at the M's valley -->
+  <circle cx="16" cy="20" r="3.4" fill={accent} />
+  <!-- Glow -->
+  <circle cx="16" cy="20" r="6" fill={accent} opacity="0.18" />
+</svg>

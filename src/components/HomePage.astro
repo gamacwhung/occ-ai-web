@@ -2,11 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './sections/Header.astro';
 import Hero from './sections/Hero.astro';
-import Features from './sections/Features.astro';
-import BentoGrid from './sections/BentoGrid.astro';
-import Vision from './sections/Vision.astro';
-import CTA from './sections/CTA.astro';
-import Footer from './sections/Footer.astro';
+import Solutions from './sections/Solutions.astro';
+import About from './sections/About.astro';
+import VirtualHuman from './sections/VirtualHuman.astro';
+import Comic from './sections/Comic.astro';
+import Game from './sections/Game.astro';
+import CTAFooter from './sections/CTAFooter.astro';
 import type { Lang } from '../i18n/ui';
 
 interface Props {
@@ -17,32 +18,22 @@ const { lang } = Astro.props;
 ---
 
 <BaseLayout>
-  <!-- Atmospheric background — sticky behind everything -->
-  <div class="fixed inset-0 pointer-events-none -z-10">
-    <div
-      class="bokeh-blur bg-primary w-[600px] h-[600px] -top-40 -left-40"
-    >
-    </div>
-    <div
-      class="bokeh-blur bg-secondary-container w-[400px] h-[400px] bottom-20 -right-20"
-    >
-    </div>
-    <div
-      class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(circle at 2px 2px, rgba(255,90,0,0.1) 1px, transparent 0); background-size: 40px 40px;"
-    >
-    </div>
-  </div>
-
-  <Header lang={lang} />
-
-  <main>
+  <div class="mx-root">
+    <Header lang={lang} />
     <Hero lang={lang} />
-    <Features lang={lang} />
-    <BentoGrid lang={lang} />
-    <Vision lang={lang} />
-    <CTA lang={lang} />
-  </main>
-
-  <Footer lang={lang} />
+    <Solutions lang={lang} />
+    <About lang={lang} />
+    <VirtualHuman lang={lang} />
+    <Comic lang={lang} />
+    <Game lang={lang} />
+    <CTAFooter lang={lang} />
+  </div>
 </BaseLayout>
+
+<style>
+  /* Each artboard / page root becomes the container query target */
+  .mx-root {
+    container-type: inline-size;
+    container-name: page;
+  }
+</style>
