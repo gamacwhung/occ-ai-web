@@ -75,8 +75,8 @@ export const ui = {
     'solutions.04.t2': '跨媒介',
     'solutions.04.t3': '生態演化',
 
-    // ---- About (§ 02) ----
-    'about.section': '§ 02 — About',
+    // ---- About (§ 05) ----
+    'about.section': '§ 05 — About',
     'about.title.l1': '在',
     'about.title.l1b': 'AI',
     'about.title.l1c': '與',
@@ -101,8 +101,8 @@ export const ui = {
     'about.ethical.label': '★ ETHICAL CORE',
     'about.ethical.body': 'AI driven by moral frameworks and human values.',
 
-    // ---- Virtual Human (§ 03) ----
-    'virtual.section': '§ 03 — Virtual Human',
+    // ---- Virtual Human (§ 02) ----
+    'virtual.section': '§ 02 — Virtual Human',
     'virtual.title.l1': '看得到、聽得懂、',
     'virtual.title.l2': '記得住',
     'virtual.title.l3': '的 AI',
@@ -170,8 +170,8 @@ export const ui = {
     'comic.flow.note': '產出可商用素材庫，跨章節維持角色一致性',
     'comic.cta': '開始試用',
 
-    // ---- Game (§ 05) ----
-    'game.section': '§ 05 — AI Game',
+    // ---- Game (§ 03) ----
+    'game.section': '§ 03 — AI Game',
     'game.title.l1': '讓',
     'game.title.l2': 'NPC',
     'game.title.l2b': '真正',
@@ -284,7 +284,7 @@ export const ui = {
     'solutions.04.t2': 'Cross-media',
     'solutions.04.t3': 'Ecology',
 
-    'about.section': '§ 02 — About',
+    'about.section': '§ 05 — About',
     'about.title.l1': 'At the',
     'about.title.l1b': 'edge',
     'about.title.l1c': 'of',
@@ -309,7 +309,7 @@ export const ui = {
     'about.ethical.label': '★ ETHICAL CORE',
     'about.ethical.body': 'AI driven by moral frameworks and human values.',
 
-    'virtual.section': '§ 03 — Virtual Human',
+    'virtual.section': '§ 02 — Virtual Human',
     'virtual.title.l1': 'AI that sees you,',
     'virtual.title.l2': 'remembers you',
     'virtual.title.l3': '',
@@ -378,7 +378,7 @@ export const ui = {
     'comic.flow.note': 'Commercial-ready library, character consistency across chapters',
     'comic.cta': 'Try It',
 
-    'game.section': '§ 05 — AI Game',
+    'game.section': '§ 03 — AI Game',
     'game.title.l1': 'NPCs that',
     'game.title.l2': 'truly',
     'game.title.l2b': '',
@@ -488,7 +488,7 @@ export const ui = {
     'solutions.04.t2': 'クロスメディア',
     'solutions.04.t3': '生態進化',
 
-    'about.section': '§ 02 — About',
+    'about.section': '§ 05 — About',
     'about.title.l1': '',
     'about.title.l1b': 'AI',
     'about.title.l1c': 'と',
@@ -513,7 +513,7 @@ export const ui = {
     'about.ethical.label': '★ ETHICAL CORE',
     'about.ethical.body': 'AI driven by moral frameworks and human values.',
 
-    'virtual.section': '§ 03 — Virtual Human',
+    'virtual.section': '§ 02 — Virtual Human',
     'virtual.title.l1': '見て、聴いて、',
     'virtual.title.l2': '覚える',
     'virtual.title.l3': 'AI',
@@ -580,7 +580,7 @@ export const ui = {
     'comic.flow.note': '商用利用可能、章を跨いだキャラ一貫性',
     'comic.cta': '試してみる',
 
-    'game.section': '§ 05 — AIゲーム',
+    'game.section': '§ 03 — AIゲーム',
     'game.title.l1': '本当に',
     'game.title.l2': '生きている',
     'game.title.l2b': '',
