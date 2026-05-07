@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from '../../i18n/utils';
-import type { Lang, UIKey } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+import FeaturesGrid from '../islands/FeaturesGrid.tsx';
 
 interface Props {
   lang: Lang;
@@ -9,75 +10,52 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-type Feature = {
-  icon: string;
-  titleKey: UIKey;
-  descKey: UIKey;
-  highlight?: boolean;
-};
-
-const features: Feature[] = [
+const features = [
   {
-    icon: 'description',
-    titleKey: 'features.story.title',
-    descKey: 'features.story.desc',
+    icon: 'story' as const,
+    title: t('features.story.title'),
+    desc: t('features.story.desc'),
   },
   {
-    icon: 'palette',
-    titleKey: 'features.character.title',
-    descKey: 'features.character.desc',
-    highlight: true,
+    icon: 'character' as const,
+    title: t('features.character.title'),
+    desc: t('features.character.desc'),
   },
   {
-    icon: 'videogame_asset',
-    titleKey: 'features.game.title',
-    descKey: 'features.game.desc',
+    icon: 'game' as const,
+    title: t('features.game.title'),
+    desc: t('features.game.desc'),
   },
   {
-    icon: 'face_6',
-    titleKey: 'features.virtual.title',
-    descKey: 'features.virtual.desc',
+    icon: 'virtual' as const,
+    title: t('features.virtual.title'),
+    desc: t('features.virtual.desc'),
   },
   {
-    icon: 'devices',
-    titleKey: 'features.platform.title',
-    descKey: 'features.platform.desc',
+    icon: 'platform' as const,
+    title: t('features.platform.title'),
+    desc: t('features.platform.desc'),
   },
 ];
 ---
 
 <section id="features" class="py-section-gap px-container-padding">
   <div class="max-w-[1440px] mx-auto">
-    <div class="mb-16">
-      <h2 class="font-headline text-headline-lg text-white mb-4 tracking-tight">
+    <div class="mb-16 text-center">
+      <h2
+        class="font-headline text-headline-lg mb-5 tracking-tight inline-block"
+        style="background: linear-gradient(120deg, #ff5a00 0%, #ff8c4d 28%, #ffd9b8 60%, #ffffff 90%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;"
+      >
         {t('features.title')}
       </h2>
-      <p class="text-body-md text-on-surface-variant opacity-70 max-w-2xl">
+      <p
+        class="text-body-md text-on-surface-variant max-w-2xl mx-auto"
+        style="letter-spacing: 0.08em; opacity: 0.55;"
+      >
         {t('features.subtitle')}
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-      {
-        features.map((f) => (
-          <div
-            class:list={[
-              'glass-vessel p-8 rounded-xl hover:border-primary/40 transition-all group',
-              f.highlight && 'border-primary/20',
-            ]}
-          >
-            <span class="material-symbols-outlined text-primary text-3xl mb-6 block">
-              {f.icon}
-            </span>
-            <h3 class="font-headline text-lg mb-2 text-white">
-              {t(f.titleKey)}
-            </h3>
-            <p class="text-sm text-on-surface-variant opacity-70 leading-relaxed">
-              {t(f.descKey)}
-            </p>
-          </div>
-        ))
-      }
-    </div>
+    <FeaturesGrid features={features} client:visible />
   </div>
 </section>
